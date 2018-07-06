@@ -50,6 +50,7 @@ exports.eventController = {
   }
 
   fetchEvents: async (req, res) => {
+    res.send(Event.find({}))
 
   }
 }

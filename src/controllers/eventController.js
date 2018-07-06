@@ -2,7 +2,7 @@ const {  Event } = require('../models');
 
 
 exports.createEvent = async (req, res) => {
-    if (!req) { res.sendStatus(500)}
+    if (!req) { res.sendStatus(400)}
 
     rejectIfUndefined(['image', 'title', 'venue', 'time', 'text'], req.body, res)
 
@@ -31,7 +31,7 @@ exports.fetchEvents = async (req, res) => {
 
 
 const rejectIfUndefined = (props, body, res) => {
-  if (props.some((prop) =>  body[prop] === undefined)) { res.send(500)}
+  if (props.some((prop) =>  body[prop] === undefined)) { res.send(400)}
 }
 
 const sanitzeUserParams = (args) => {

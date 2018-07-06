@@ -5,7 +5,8 @@ const morgan = require('morgan');
 
 // database address
 const { mongoUri } = require('./config/keys');
-console.log(mongoUri)
+
+
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUri);
 
@@ -16,7 +17,7 @@ app.use(morgan('dev'));
 
 require('./routes')(app);
 
-app.get('/', (req, res) => res.send('hit route'))
+
 const port = 5000;
 
 app.listen(process.env.PORT || port)

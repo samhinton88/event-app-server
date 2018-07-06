@@ -39,20 +39,20 @@ exports.eventController = {
       .catch(err => res.send(500))
 
     res.send(newEvent);
-  }
+  },
 
   editEvent: async (req, res) => {
 
-  }
+  },
 
   deleteEvent: async (req, res) => {
 
-  }
+  },
 
   fetchEvents: async (req, res) => {
     res.send(Event.find({}))
 
-  }
+  },
 }
 
 const rejectIfUndefined = (props, body, res) => {

@@ -1,0 +1,11 @@
+{
+  "name": "event-app-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "sam hinton <sam.hinton88@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.1"
+  }
+}

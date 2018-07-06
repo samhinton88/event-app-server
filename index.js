@@ -13,8 +13,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
+
 require('./routes')(app);
 
+app.get('/', (req, res) => res.send('hit route'))
 const port = 5000;
 
 app.listen(process.env.PORT || port)

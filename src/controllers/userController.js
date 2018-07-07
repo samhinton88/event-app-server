@@ -19,6 +19,12 @@ exports.createUser = async (req, res) => {
     res.send(newUser)
   }
 
+exports.fetchUsers = async (req, res) => {
+
+  const users = User.find({});
+  res.send(users)
+}
+
 
 exports.deleteUser = async (req, res) => {
   if(!req) { res.sendStatus(500)}

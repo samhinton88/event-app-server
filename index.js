@@ -12,9 +12,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongoUri);
 
 const app = express();
+app.use(cors())
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use(cors())
 
 
 require('./routes')(app);

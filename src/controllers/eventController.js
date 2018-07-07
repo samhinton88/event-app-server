@@ -18,16 +18,28 @@ exports.createEvent = async (req, res) => {
 
 exports.editEvent = async (req, res) => {
 
-  }
+  if(!req.body || !req.params.eventId) { res.sendStatus(400) }
+
+  const event = await Event.findOne({_id: req.params.eventId });
+
+  event.set(req.body);
+  await event.save();
+  res.send(event);
+}
 
 exports.deleteEvent = async (req, res) => {
 
-  }
+  if(!req.params.eventId) { res.sendStatus(400)}
+
+  await Event.findOneAndRemove({_id: req.params.eventId})
+  res.sendStatus(200)
+
+}
 
 exports.fetchEvents = async (req, res) => {
     res.send(Event.find({}))
 
-  }
+}
 
 
 const rejectIfUndefined = (props, body, res) => {

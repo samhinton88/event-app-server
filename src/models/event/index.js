@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const eventSchema = new Schema({
-  image: String,
+  image: { type: Buffer, contentType: String},
   title: String,
   venue: String,
   time: Date,

@@ -7,8 +7,9 @@ exports.createEvent = async (req, res) => {
     console.log(req.body)
     // rejectIfUndefined(['image', 'title', 'venue', 'time', 'text'], req.body, res)
 
-    const { image, title, venue, time, text } = req.body;
+    const { image: img, title, venue, time, text } = req.body;
 
+    const image = Buffer.from(img, 'base64')
     const newEvent = new Event({ image, title, venue, time, text});
     try {
       await newEvent.save()

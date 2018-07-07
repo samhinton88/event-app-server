@@ -2,18 +2,23 @@ const {  Event } = require('../models');
 
 
 exports.createEvent = async (req, res) => {
-    if (!req) { res.sendStatus(400)}
+    if (!req.body) { res.sendStatus(400)}
 
+    console.log(req.body)
     rejectIfUndefined(['image', 'title', 'venue', 'time', 'text'], req.body, res)
 
     const { image, title, venue, time, text } = req.body;
 
     const newEvent = new Event({ image, title, venue, time, text});
+    try {
+      await newEvent.save()
+        .catch(err => res.send(500))
 
-    await newEvent.save()
-      .catch(err => res.send(500))
+      res.status(200).send(newEvent);
 
-    res.send(newEvent);
+    } catch(err) {
+      res.sendStatus(500)
+    }
   }
 
 exports.editEvent = async (req, res) => {
@@ -37,7 +42,9 @@ exports.deleteEvent = async (req, res) => {
 }
 
 exports.fetchEvents = async (req, res) => {
-    res.send(Event.find({}))
+
+    const events = await Event.find({});
+    res.send(events)
 
 }
 

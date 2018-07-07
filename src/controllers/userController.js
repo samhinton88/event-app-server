@@ -21,7 +21,7 @@ exports.createUser = async (req, res) => {
 
 exports.fetchUsers = async (req, res) => {
 
-  const users = User.find({});
+  const users = await User.find({});
   res.send(users)
 }
 

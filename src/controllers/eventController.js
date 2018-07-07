@@ -14,7 +14,9 @@ exports.createEvent = async (req, res) => {
     const image = Buffer.from(img, 'base64')
 
     console.log('image after buff', image)
-    const newEvent = new Event({ image, title, venue, time, text});
+    const newEvent = new Event({ title, venue, time, text});
+
+    newEvent.image.data = image;
     try {
       await newEvent.save()
         .catch(err => res.send(500))

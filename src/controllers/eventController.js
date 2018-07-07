@@ -5,7 +5,7 @@ exports.createEvent = async (req, res) => {
     if (!req.body) { res.sendStatus(400)}
 
     console.log(req.body)
-    rejectIfUndefined(['image', 'title', 'venue', 'time', 'text'], req.body, res)
+    // rejectIfUndefined(['image', 'title', 'venue', 'time', 'text'], req.body, res)
 
     const { image, title, venue, time, text } = req.body;
 

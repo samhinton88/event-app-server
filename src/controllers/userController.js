@@ -20,6 +20,7 @@ exports.createUser = async (req, res) => {
   }
 
 exports.fetchUsers = async (req, res) => {
+  console.log('hit fetch users')
 
   const users = await User.find({});
   res.send(users)

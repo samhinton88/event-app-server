@@ -9,15 +9,14 @@ exports.createEvent = async (req, res) => {
 
     const { image: img, title, venue, time, text } = req.body;
 
-    console.log('img before buff',img)
+
 
     const image = Buffer.from(img, 'base64')
 
-    console.log('image after buff', image)
     const newEvent = new Event({ title, venue, time, text});
 
     newEvent.image.data = image;
-    newEvent.image.contentType = 'image/png';
+    newEvent.image.contentType = image.contentType;
     try {
       await newEvent.save()
         .catch(err => res.send(500))
@@ -35,9 +34,20 @@ exports.editEvent = async (req, res) => {
 
   const event = await Event.findOne({_id: req.params.eventId });
 
-  event.set(req.body);
-  await event.save();
-  res.send(event);
+  const { image: img, title, venue, time, text } = req.body;
+
+  const image = Buffer.from(img, 'base64')
+
+  try {
+    event.set({ title, venue, time, text});
+    event.image.data = image;
+    event.image.contentType = image.contentType;
+    await event.save();
+    res.send(event);
+
+  } catch (err) {
+    res.sendStatus(500).send(err)
+  }
 }
 
 exports.deleteEvent = async (req, res) => {

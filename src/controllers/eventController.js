@@ -35,13 +35,17 @@ exports.editEvent = async (req, res) => {
   const event = await Event.findOne({_id: req.params.eventId });
 
   const { image: img, title, venue, time, text } = req.body;
+  let image;
 
-  const image = Buffer.from(img, 'base64')
-
-  try {
-    event.set({ title, venue, time, text});
+  if (img) {
+    image = Buffer.from(img, 'base64')
     event.image.data = image;
     event.image.contentType = image.contentType;
+  }
+
+  event.set({ title, venue, time, text});
+
+  try {
     await event.save();
     res.send(event);
 

@@ -16,7 +16,7 @@ exports.createEvent = async (req, res) => {
     const newEvent = new Event({ title, venue, time, text});
 
     newEvent.image.data = image;
-    newEvent.image.contentType = image.contentType;
+    newEvent.image.contentType = img.contentType;
     try {
       await newEvent.save()
         .catch(err => res.send(500))

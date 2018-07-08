@@ -39,7 +39,7 @@ exports.editEvent = async (req, res) => {
   let image;
 
   if (img) {
-    image = Buffer.from(img, 'base64')
+    image = Buffer.from(img.data.data, 'base64')
     event.image.data = image;
     event.image.contentType = image.contentType;
   }

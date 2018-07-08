@@ -34,6 +34,7 @@ exports.editEvent = async (req, res) => {
 
   const event = await Event.findOne({_id: req.params.eventId });
 
+  console.log(req.body)
   const { image: img, title, venue, time, text } = req.body;
   let image;
 

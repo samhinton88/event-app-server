@@ -11,6 +11,7 @@ exports.createEvent = async (req, res) => {
 
     const newEvent = new Event({ title, venue, time, text});
     let image;
+
     if (img) {
       image = Buffer.from(img.data, 'base64')
       newEvent.image.data = image;

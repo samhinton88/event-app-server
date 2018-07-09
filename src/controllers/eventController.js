@@ -64,10 +64,10 @@ exports.registerInterest = async (req, res) => {
   const { userId, eventId } = req.body;
 
   const user = await User.findById(userId)
-    .catch(err => res.send(err))
+    .catch(err => res.sendStatus(400).send(err))
 
   const event = await Event.findById(eventId)
-    .catch(err => res.send(err))
+    .catch(err => res.sendStatus(400).send(err))
 
   event.registeredUsers.push(user);
   await event.save()

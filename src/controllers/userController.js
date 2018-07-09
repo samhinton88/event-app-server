@@ -21,21 +21,17 @@ exports.createUser = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   if(!req.body || !req.body.email) { res.sendStatus(400)}
-
+  console.log(req.body)
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email })
-    .catch(err => res.sendStatus(500));
+  const user = await User.findOne({'local.email': email})
+    .catch(err => res.send(err))
 
-  if(!user) {
-    res.sendStatus(400).send('no resource found for that email address')
-  }
 
-  if (password != user.password) {
-    res.sendStatus(400).send('incorrect password')
-  }
+  if(!user) { res.sendStatus(400)}
 
-  res.sendStatus(200).send(user);
+  if(user.local.password != password) { res.sendStatus(400).send('bad password')}
+  res.send(user)
 }
 
 exports.fetchUsers = async (req, res) => {

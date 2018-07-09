@@ -69,7 +69,8 @@ exports.registerInterest = async (req, res) => {
   const event = await Event.findById(eventId)
     .catch(err => res.sendStatus(400).send(err))
 
-  event.registeredUsers.push(user);
+  event.interestedUsers.push(user);
+
   await event.save()
     .catch(err => res.send(err));
   res.send(event)

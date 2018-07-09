@@ -1,4 +1,4 @@
-const {  Event } = require('../models');
+const {  Event, User } = require('../models');
 
 
 exports.createEvent = async (req, res) => {
@@ -56,6 +56,23 @@ exports.editEvent = async (req, res) => {
   } catch (err) {
     res.sendStatus(500).send(err)
   }
+}
+
+exports.registerInterest = async (req, res) => {
+  if(!req.body)  { res.sendStatus(400)}
+
+  const { userId, eventId } = req.body;
+
+  const user = await User.findById({ userId })
+    .catch(err => res.send(err))
+
+  const event = await Event.findById({ eventId })
+    .catch(err => res.send(err))
+
+  event.registeredUsers.push(user);
+  await event.save()
+    .catch(err => res.send(err));
+  res.send(event)
 }
 
 exports.deleteEvent = async (req, res) => {

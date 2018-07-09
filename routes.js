@@ -10,4 +10,7 @@ module.exports = app => {
   app.post('/api/events', eventController.createEvent)
   app.put('/api/events/:eventId', eventController.editEvent)
   app.delete('/api/events/:eventId', eventController.deleteEvent)
+
+
+  app.post('/api/registerinterest', eventController.registerInterest)
 };

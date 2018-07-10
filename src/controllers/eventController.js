@@ -7,17 +7,10 @@ exports.createEvent = async (req, res) => {
 
     // rejectIfUndefined(['image', 'title', 'venue', 'time', 'text'], req.body, res)
 
-    const { image: img, title, venue, time, text } = req.body;
+    const { cloudinaryUrl, title, venue, time, text } = req.body;
 
-    const newEvent = new Event({ title, venue, time, text});
+    const newEvent = new Event({ title, venue, time, text, cloudinaryUrl});
     let image;
-
-    if (img) {
-      image = Buffer.from(img.data, 'base64')
-      newEvent.image.data = image;
-      newEvent.image.contentType = img.contentType;
-    }
-
 
 
     try {
@@ -38,16 +31,10 @@ exports.editEvent = async (req, res) => {
   const event = await Event.findOne({_id: req.params.eventId });
 
   console.log(req.body)
-  const { image: img, title, venue, time, text } = req.body;
+  const { cloudinaryUrl, title, venue, time, text } = req.body;
   let image;
 
-  if (img) {
-    image = Buffer.from(img.data.data, 'base64')
-    event.image.data = image;
-    event.image.contentType = image.contentType;
-  }
-
-  event.set({ title, venue, time, text});
+  event.set({ cloudinaryUrl, title, venue, time, text});
 
   try {
     await event.save();
